@@ -1,0 +1,53 @@
+<section id="login" class="main-bg">
+
+    <div *ngIf="errorMessage" class="error-message-container">
+        <i class="fas fa-times-circle mr-2"></i>    
+        <span>{{errorMessage}}</span>
+    </div>
+
+    <div *ngIf="loginState" class="success-message-container">
+        <i class="fas fa-check-circle mr-2"></i>    
+        <span>Login successfully</span>
+    </div>
+
+    <div class="container">
+    
+        <form [formGroup]="loginForm" (ngSubmit)="loginForm.valid && submitLoginForm()">
+            <div class="form-group w-50 m-auto">
+ 
+               <div class="group">
+                <input [class.is-valid]="loginForm.get('email')?.status=='VALID'" formControlName="email" type="email" placeholder="Email address" class="form-control my-3">
+                <div *ngIf='loginForm.get("email")?.errors && loginForm.get("email")?.touched' class="error my-2">
+                    <p *ngIf="loginForm.get('email')?.errors?.required">Email Address is required</p>
+                    <p *ngIf="loginForm.get('email')?.errors?.email">Email Address is invalid</p>
+                </div>
+               </div>
+        
+        
+               <div class="group">
+                <input [class.is-valid]="loginForm.get('password')?.status=='VALID'" formControlName="password" type="password" placeholder="Password" class="form-control my-3">
+
+                <div *ngIf='loginForm.get("password")?.errors && loginForm.get("password")?.touched' class="error my-2">
+                    <p *ngIf="loginForm.get('password')?.errors?.required">Password is required</p>
+                    <p *ngIf="loginForm.get('password')?.errors?.pattern">Password minmimum length is 8</p>
+                    <p *ngIf="loginForm.get('password')?.errors?.pattern">Password must begin with upper case letter and contain lower
+                        case or upper case letters
+                        and contain one
+                        special character '@ , $ , % , # , &'
+                    </p>
+                </div>
+               </div>
+        
+                <button class="btn btn-info w-100 my-3 py-2 d-flex justify-content-center">
+                    <span *ngIf="!isClicked">Login</span>
+                
+                <div *ngIf="isClicked" class="loader d-flex">
+                    <div class="dot-loader"></div>
+                    <div class="dot-loader"></div>  
+                    <div class="dot-loader"></div>
+                </div>
+                </button>
+            </div>
+        </form>
+    </div>
+ </section>

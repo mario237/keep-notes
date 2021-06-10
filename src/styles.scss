@@ -1,0 +1,122 @@
+/* You can add global styles to this file, and also import other style files */
+
+$fontColor:#fff;
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+section{
+    min-height: 100vh;
+    background-color: #343a40;
+    position: relative;
+    overflow: hidden;
+}
+
+
+i{
+    cursor: pointer;
+}
+
+
+.form-group{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+   transform: translate(-50% , -50%);
+}
+
+.error{
+    background-color: red;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+p{
+    margin-bottom: 0 !important;
+}
+
+
+
+
+/************Loaders************/
+
+.dot-loader {
+    height: 5px;
+    width: 5px;
+    border-radius: 50%;
+    background-color: #fff;
+    position: relative;
+    -webkit-animation: 1.2s scaleDown ease-in-out infinite;
+    animation: 1.2s scaleDown ease-in-out infinite;
+}
+
+.dot-loader:nth-child(2) {
+    margin: 0 15px;
+    -webkit-animation: 1.2s scaleDown ease-in-out infinite 0.15555s;
+    animation: 1.2s scaleDown ease-in-out infinite 0.15555s;
+}
+
+.dot-loader:nth-child(3) {
+    -webkit-animation: 1.2s scaleDown ease-in-out infinite 0.3s;
+    animation: 1.2s scaleDown ease-in-out infinite 0.3s;
+}
+
+@-webkit-keyframes scaleDown {
+    0%,
+    80%,
+    100% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+    40% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+@keyframes scaleDown {
+    0%,
+    80%,
+    100% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+    40% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+/*******************End Loaders*******************************/
+
+.success-message-container{
+    background-color: #00c853;
+    color: #fff;
+    position: absolute;
+    top: 10%;
+    right: 20px;
+    padding: 15px 30px;
+    border-radius: 5px;
+}
+
+.error-message-container{
+    background-color: #f00;
+    color: #fff;
+    position: absolute;
+    top: 10%;
+    right: 20px;
+    padding: 15px 30px;
+    border-radius: 5px;
+}
+
+
+@media screen and(max-width:992px){
+    .form-group{
+        width: 75% !important;
+    }
+}

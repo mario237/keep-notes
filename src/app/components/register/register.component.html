@@ -1,0 +1,83 @@
+ <section id="register" class="main-bg">
+
+    <div *ngIf="errorMessage" class="error-message-container">
+        <i class="fas fa-times-circle mr-2"></i>    
+        <span>{{errorMessage}}</span>
+    </div>
+
+    <div *ngIf="registrationState" class="success-message-container">
+        <i class="fas fa-check-circle mr-2"></i>    
+        <span>Account is created successfully</span>
+    </div>
+
+
+   <div class="container">
+
+    <form [formGroup]="registerForm" (ngSubmit)='registerForm.valid && submitRegisterForm()'>
+
+        <div class="form-group w-50 m-auto">
+
+            <div class="row my-3">
+                <div class="col-md-6">
+                    <input [class.is-valid]="registerForm.get('first_name')?.status=='VALID'" formControlName="first_name" type="text" placeholder="First name" class="form-control my-2">
+
+                    <div *ngIf='registerForm.get("first_name")?.errors && registerForm.get("first_name")?.touched' class="error my-2">
+                        <p *ngIf="registerForm.get('first_name')?.errors?.required"> First name is required </p>
+                        <p *ngIf="registerForm.get('first_name')?.errors?.minlength"> First name minimum length is 3 </p>
+                        <p *ngIf="registerForm.get('first_name')?.errors?.maxlength"> First name maximum length is 10 </p>
+                    </div>
+                </div>
+    
+                <div class="col-md-6">
+                    <input [class.is-valid]="registerForm.get('last_name')?.status=='VALID'" formControlName="last_name" type="text" placeholder="Last name" class="form-control my-2">
+
+                    <div *ngIf='registerForm.get("last_name")?.errors && registerForm.get("last_name")?.touched' class="error my-2">
+                        <p *ngIf="registerForm.get('last_name')?.errors?.required">Last name is required</p>
+                        <p *ngIf="registerForm.get('last_name')?.errors?.minlength">Last name minimum length is 3</p>
+                        <p *ngIf="registerForm.get('last_name')?.errors?.maxlength">Last name maximum length is 10</p>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="group">
+            <input [class.is-valid]="registerForm.get('email')?.status=='VALID'" formControlName="email" type="email" placeholder="Email address" class="form-control my-2">
+
+            <div *ngIf='registerForm.get("email")?.errors && registerForm.get("email")?.touched' class="error my-2">
+                <p *ngIf="registerForm.get('email')?.errors?.required">Email Address is required</p>
+                <p *ngIf="registerForm.get('email')?.errors?.email">Email Address is invalid</p>
+            </div>
+
+            </div>
+            
+    
+          <div class="group">
+            <input [class.is-valid]="registerForm.get('age')?.status=='VALID'" formControlName="age" type="number" placeholder="Age" class="form-control my-3">
+
+           
+          </div>
+    
+          <div class="group">
+            <input [class.is-valid]="registerForm.get('password')?.status=='VALID'" formControlName="password" type="password" placeholder="Password" class="form-control my-3">
+            <div *ngIf='registerForm.get("password")?.errors && registerForm.get("password")?.touched' class="error my-2">
+                <p *ngIf="registerForm.get('password')?.errors?.required">Password is required</p>
+                <p *ngIf="registerForm.get('password')?.errors?.pattern">Password minmimum length is 8</p>
+                <p *ngIf="registerForm.get('password')?.errors?.pattern">Password must begin with upper case letter and contain lower
+                    case or upper case letters
+                    and contain one
+                    special character '@ , $ , % , # , &'
+                </p>
+            </div>
+          </div>
+            <button [disabled]="registerForm.invalid" [ngStyle]="registerForm.invalid ? isFormVaildStyle : isFormInVaildStyle" class="btn btn-info w-100 my-3 py-2 d-flex justify-content-center" type="submit">
+                <span *ngIf="!isClicked">Register</span>
+                
+                <div *ngIf="isClicked" class="loader d-flex">
+                    <div class="dot-loader"></div>
+                    <div class="dot-loader"></div>  
+                    <div class="dot-loader"></div>
+                </div>
+            </button>
+        </div>
+    </form>
+   </div>
+</section>
