@@ -54,9 +54,9 @@
             <input [class.is-valid]="registerForm.get('age')?.status=='VALID'" formControlName="age" type="number" placeholder="Age" class="form-control my-3">
 
             <div *ngIf='registerForm.get("age")?.errors != null && registerForm.get("age")?.touched' class="error my-2">
-                <p *ngIf="registerForm.get('age')?.errors?.required != null">Age is required</p>
-                <p *ngIf="registerForm.get('age')?.errors?.min != null">Age minimum is 18</p>
-                <p *ngIf="registerForm.get('age')?.errors?.max != null">Age maximum is 45</p>
+                <p *ngIf="registerForm.get('age')?.errors?.required">Age is required</p>
+                <p *ngIf="registerForm.get('age')?.errors?.min">Age minimum is 18</p>
+                <p *ngIf="registerForm.get('age')?.errors?.max">Age maximum is 45</p>
             </div>
 
             
