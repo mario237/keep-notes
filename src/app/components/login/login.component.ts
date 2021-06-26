@@ -72,9 +72,9 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     $('#login').particleground();
 
-    if (this._AuthService.isLoggedIn())
+    if (this._AuthService.isLoggedIn()) {
       this._Router.navigate(['/profile']);
-
+    }
   }
 
 }

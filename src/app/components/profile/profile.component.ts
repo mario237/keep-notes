@@ -17,9 +17,9 @@ export class ProfileComponent implements OnInit {
   userID: string = '';
   addNoteState: boolean = false;
   isLoading: boolean = false;
-  noteID:string = '';
+  noteID: string = '';
 
-  constructor(private _NotesService: NotesService , private _Router:Router) { }
+  constructor(private _NotesService: NotesService, private _Router: Router) { }
 
 
 
@@ -27,14 +27,14 @@ export class ProfileComponent implements OnInit {
 
     this.isLoading = true;
 
-   try {
-    this.userToken = localStorage.getItem('TOKEN');
-    var decoded: any = jwtDecode(this.userToken);
+    try {
+      this.userToken = localStorage.getItem('TOKEN');
+      var decoded: any = jwtDecode(this.userToken);
 
-   } catch (error) {
-     localStorage.clear();
-     this._Router.navigate(['/login']);
-   }
+    } catch (error) {
+      localStorage.clear();
+      this._Router.navigate(['/login']);
+    }
 
     this.userID = decoded._id;
 
@@ -46,8 +46,7 @@ export class ProfileComponent implements OnInit {
         this.userNotes = response.Notes;
         setTimeout(() => { this.isLoading = false; }, 700);
       } else {
-        localStorage.clear();
-        this._Router.navigate(['/login']);
+        this.isLoading = false;
       }
     })
   }
@@ -81,13 +80,13 @@ export class ProfileComponent implements OnInit {
 
   deleteNoteData() {
 
-    let data = {token: this.userToken, NoteID: this.noteID}
+    let data = { token: this.userToken, NoteID: this.noteID }
 
     this._NotesService.deletUserNote(data).subscribe((response) => {
       if (response.message == "deleted") {
         $("#deleteNote").modal('hide');
         this.getUserNotes();
-      }else{
+      } else {
         console.log('error');
       }
     })
@@ -95,30 +94,30 @@ export class ProfileComponent implements OnInit {
   }
 
   getNoteID(noteID: string) {
-   this.noteID = noteID;
+    this.noteID = noteID;
   }
 
-  setCurrentNoteData(){
+  setCurrentNoteData() {
     for (let index = 0; index < this.userNotes.length; index++) {
-      if(this.userNotes[index]._id == this.noteID){              
+      if (this.userNotes[index]._id == this.noteID) {
         this.updateNoteForm.controls.title.setValue(this.userNotes[index].title);
         this.updateNoteForm.controls.desc.setValue(this.userNotes[index].desc);
-        
+
       }
-      
+
     }
   }
 
-  updateUserNote(){
+  updateUserNote() {
     let data = {
-      NoteID:this.noteID,
-      token:this.userToken,
-      title:this.updateNoteForm.controls.title.value,
-      desc:this.updateNoteForm.controls.desc.value
+      NoteID: this.noteID,
+      token: this.userToken,
+      title: this.updateNoteForm.controls.title.value,
+      desc: this.updateNoteForm.controls.desc.value
     }
 
-    this._NotesService.updateUserNote(data).subscribe((response)=>{
-      if(response.message == "updated"){
+    this._NotesService.updateUserNote(data).subscribe((response) => {
+      if (response.message == "updated") {
         $("#editNote").modal('hide');
         this.getUserNotes();
       }
@@ -126,7 +125,7 @@ export class ProfileComponent implements OnInit {
   }
 
 
-  
+
 
   ngOnInit(): void {
     this.getUserNotes();
