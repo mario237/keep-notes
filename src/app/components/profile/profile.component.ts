@@ -46,6 +46,7 @@ export class ProfileComponent implements OnInit {
         this.userNotes = response.Notes;
         setTimeout(() => { this.isLoading = false; }, 700);
       } else {
+        this.userNotes = [];
         this.isLoading = false;
       }
     })
